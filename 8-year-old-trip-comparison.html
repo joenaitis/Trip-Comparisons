@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Comparison Spreadsheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            min-width: 1200px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .category-header {
+            background-color: #e8f5e9;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .total-row {
+            background-color: #fff3e0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .grand-total {
+            background-color: #ffd54f;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .notes-cell {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .readonly {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .info-cell {
+            font-size: 0.85em;
+            line-height: 1.5;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trip Comparison: Tokyo vs NYC vs Mexico</h1>
+
+        <table id="comparisonTable">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Category</th>
+                    <th style="width: 16%;">Tokyo</th>
+                    <th style="width: 16%;">NYC</th>
+                    <th style="width: 16%;">Mexico City</th>
+                    <th style="width: 16%;">Mexico City + Riviera</th>
+                    <th style="width: 16%;">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DESTINATION INFORMATION -->
+                <tr class="category-header">
+                    <td colspan="6">DESTINATION INFORMATION</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Best Times to Visit</td>
+                    <td class="info-cell">
+                        <strong>Spring (Mar-May):</strong> Cherry blossoms, perfect weather<br>
+                        <strong>Fall (Sep-Nov):</strong> Comfortable temps, autumn colors
+                    </td>
+                    <td class="info-cell">
+                        <strong>Spring (Apr-May):</strong> Mild weather, flowers blooming<br>
+                        <strong>Fall (Sep-Oct):</strong> Pleasant temps, beautiful foliage
+                    </td>
+                    <td class="info-cell">
+                        <strong>Oct-Nov:</strong> Day of the Dead celebrations, perfect weather<br>
+                        <strong>Mar-May:</strong> Warm, dry, comfortable
+                    </td>
+                    <td class="info-cell">
+                        <strong>Nov-Apr:</strong> Dry season, perfect beach weather<br>
+                        <strong>Avoid:</strong> Jun-Oct (hurricane season, very hot)
+                    </td>
+                    <td class="notes-cell">Peak times</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Most Economical Times</td>
+                    <td class="info-cell">
+                        <strong>Jan-Feb:</strong> Post-New Year, fewer tourists<br>
+                        <strong>Savings:</strong> Flights ~$150 cheaper, hotels 20-30% less
+                    </td>
+                    <td class="info-cell">
+                        <strong>Jan-Feb:</strong> Cold but cheap hotels<br>
+                        <strong>Savings:</strong> Hotels 25-35% cheaper
+                    </td>
+                    <td class="info-cell">
+                        <strong>May-Sep:</strong> Rainy season but still pleasant<br>
+                        <strong>Savings:</strong> 20-30% less on everything
+                    </td>
+                    <td class="info-cell">
+                        <strong>May-Oct:</strong> Rainy/hurricane season<br>
+                        <strong>Savings:</strong> Beach hotels 30-40% cheaper
+                    </td>
+                    <td class="notes-cell">Budget times</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Top Activities for 8-Year-Old</td>
+                    <td class="info-cell">
+                        • Pokemon Centers & Nintendo Store<br>
+                        • TeamLab digital art<br>
+                        • Tokyo DisneySea<br>
+                        • Akihabara arcades<br>
+                        • Gashapon machines
+                    </td>
+                    <td class="info-cell">
+                        • Nintendo Store (5th Ave)<br>
+                        • Coney Island beach<br>
+                        • Top of the Rock<br>
+                        • Central Park<br>
+                        • FAO Schwarz
+                    </td>
+                    <td class="info-cell">
+                        • <strong>CLIMB Teotihuacan pyramids!</strong><br>
+                        • Pokemon stores (Centro Poke, Pokeshop)<br>
+                        • Xochimilco boats<br>
+                        • Templo Mayor ruins<br>
+                        • Torre Latinoamericana
+                    </td>
+                    <td class="info-cell">
+                        • <strong>CLIMB 3 pyramid sites!</strong><br>
+                        • Swim with sea turtles<br>
+                        • Cenote swimming<br>
+                        • Beach activities<br>
+                        • Pokemon stores in CDMX
+                    </td>
+                    <td class="notes-cell">Kid-focused</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Ancient Buildings</td>
+                    <td class="info-cell">Temples, shrines (can't climb)</td>
+                    <td class="info-cell">None (modern city)</td>
+                    <td class="info-cell">
+                        <strong>★★★★★ Teotihuacan!</strong><br>
+                        Pyramid of Sun & Moon<br>
+                        Templo Mayor Aztec ruins<br>
+                        <strong>CAN CLIMB THEM!</strong>
+                    </td>
+                    <td class="info-cell">
+                        <strong>★★★★★ THREE SITES!</strong><br>
+                        Teotihuacan, Tulum, Coba<br>
+                        <strong>ALL CLIMBABLE!</strong>
+                    </td>
+                    <td class="notes-cell">His interest</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Pokemon Availability</td>
+                    <td class="info-cell">
+                        <strong>★★★★★ BEST</strong><br>
+                        Multiple Pokemon Centers<br>
+                        Nintendo Store<br>
+                        Exclusive items
+                    </td>
+                    <td class="info-cell">
+                        <strong>★★★ GOOD</strong><br>
+                        Nintendo Store 5th Ave<br>
+                        Pokemon section<br>
+                        Not dedicated store
+                    </td>
+                    <td class="info-cell">
+                        <strong>★★★★ VERY GOOD</strong><br>
+                        Centro Poke Coapa<br>
+                        Pokeshop México<br>
+                        Multiple gaming stores
+                    </td>
+                    <td class="info-cell">
+                        <strong>★★★★ VERY GOOD</strong><br>
+                        Same as Mexico City<br>
+                        (in CDMX portion)
+                    </td>
+                    <td class="notes-cell">His interest</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Unique Advantages</td>
+                    <td class="info-cell">
+                        • Ultimate Pokemon destination<br>
+                        • Once-in-lifetime cultural experience<br>
+                        • Extremely safe & clean<br>
+                        • Amazing food experiences
+                    </td>
+                    <td class="info-cell">
+                        • Easy travel (no jet lag)<br>
+                        • Flexible trip length<br>
+                        • English everywhere<br>
+                        • Iconic American experience
+                    </td>
+                    <td class="info-cell">
+                        • <strong>CLIMBABLE 2,000-year pyramids!</strong><br>
+                        • You speak Spanish!<br>
+                        • Short flight, minimal jet lag<br>
+                        • Very affordable<br>
+                        • Amazing food
+                    </td>
+                    <td class="info-cell">
+                        • <strong>Pyramids + beach + wildlife!</strong><br>
+                        • Wild sea turtles<br>
+                        • You speak Spanish!<br>
+                        • Best of everything
+                    </td>
+                    <td class="notes-cell">Pros</td>
+                </tr>
+
+                <!-- TRIP BASICS -->
+                <tr class="category-header">
+                    <td colspan="6">TRIP BASICS</td>
+                </tr>
+                <tr>
+                    <td>Number of Days</td>
+                    <td><input type="number" id="tokyo-days" value="7" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-days" value="5" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-days" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-days" value="8" onchange="calculate()"></td>
+                    <td class="notes-cell">Full days</td>
+                </tr>
+                <tr>
+                    <td>Number of Nights</td>
+                    <td><input type="number" id="tokyo-nights" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-nights" value="4" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-nights" value="5" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-nights" value="7" onchange="calculate()"></td>
+                    <td class="notes-cell">Hotel nights</td>
+                </tr>
+                <tr>
+                    <td>Number of Travelers</td>
+                    <td><input type="number" id="tokyo-travelers" value="2" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-travelers" value="2" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-travelers" value="2" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-travelers" value="2" onchange="calculate()"></td>
+                    <td class="notes-cell">People</td>
+                </tr>
+
+                <!-- FLIGHTS -->
+                <tr class="category-header">
+                    <td colspan="6">FLIGHTS</td>
+                </tr>
+                <tr>
+                    <td>Flight Time (hours)</td>
+                    <td><input type="number" id="tokyo-flight-time" value="16" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-flight-time" value="2" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-flight-time" value="5.5" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-flight-time" value="5.5" onchange="calculate()"></td>
+                    <td class="notes-cell">One way</td>
+                </tr>
+                <tr>
+                    <td>Time Zone Difference</td>
+                    <td><input type="number" id="tokyo-timezone" value="13" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-timezone" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-timezone" value="1" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-timezone" value="1" onchange="calculate()"></td>
+                    <td class="notes-cell">Hours</td>
+                </tr>
+                <tr>
+                    <td>Cost Per Person (Round Trip)</td>
+                    <td><input type="number" id="tokyo-flight-pp" value="850" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-flight-pp" value="250" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-flight-pp" value="560" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-flight-pp" value="940" onchange="calculate()"></td>
+                    <td class="notes-cell">USD</td>
+                </tr>
+                <tr>
+                    <td>Total Flight Cost</td>
+                    <td class="readonly"><input type="number" id="tokyo-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-flight-total" readonly></td>
+                    <td class="notes-cell">Auto-calc</td>
+                </tr>
+
+                <!-- LODGING -->
+                <tr class="category-header">
+                    <td colspan="6">LODGING</td>
+                </tr>
+                <tr>
+                    <td>Cost Per Night (1 Adult + 1 Kid)</td>
+                    <td><input type="number" id="tokyo-hotel-night" value="175" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-hotel-night" value="225" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-hotel-night" value="95" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-hotel-night" value="115" onchange="calculate()"></td>
+                    <td class="notes-cell">For reference</td>
+                </tr>
+                <tr>
+                    <td>Cost Per Night (2 Adults + 4 Kids)</td>
+                    <td><input type="number" id="tokyo-hotel-family" value="250" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-hotel-family" value="350" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-hotel-family" value="140" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-hotel-family" value="180" onchange="calculate()"></td>
+                    <td class="notes-cell">Family trip</td>
+                </tr>
+                <tr>
+                    <td>Total Lodging Cost</td>
+                    <td class="readonly"><input type="number" id="tokyo-hotel-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-hotel-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-hotel-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-hotel-total" readonly></td>
+                    <td class="notes-cell">Uses 1+1 rate</td>
+                </tr>
+
+                <!-- DAILY EXPENSES -->
+                <tr class="category-header">
+                    <td colspan="6">DAILY EXPENSES</td>
+                </tr>
+                <tr>
+                    <td>Food Per Day</td>
+                    <td><input type="number" id="tokyo-food-day" value="80" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-food-day" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-food-day" value="60" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-food-day" value="70" onchange="calculate()"></td>
+                    <td class="notes-cell">Both people</td>
+                </tr>
+                <tr>
+                    <td>Transportation Per Day</td>
+                    <td><input type="number" id="tokyo-transport-day" value="25" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-transport-day" value="30" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-transport-day" value="15" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-transport-day" value="25" onchange="calculate()"></td>
+                    <td class="notes-cell">Transit/taxis</td>
+                </tr>
+                <tr>
+                    <td>Activities/Attractions Per Day</td>
+                    <td><input type="number" id="tokyo-activities-day" value="50" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-activities-day" value="70" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-activities-day" value="30" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-activities-day" value="35" onchange="calculate()"></td>
+                    <td class="notes-cell">Admissions, etc</td>
+                </tr>
+                <tr>
+                    <td>Total Daily Expenses</td>
+                    <td class="readonly"><input type="number" id="tokyo-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-daily-total" readonly></td>
+                    <td class="notes-cell">Auto-calc</td>
+                </tr>
+
+                <!-- ONE-TIME EXPENSES -->
+                <tr class="category-header">
+                    <td colspan="6">ONE-TIME EXPENSES</td>
+                </tr>
+                <tr>
+                    <td>Travel Insurance</td>
+                    <td><input type="number" id="tokyo-insurance" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-insurance" value="50" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-insurance" value="75" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-insurance" value="100" onchange="calculate()"></td>
+                    <td class="notes-cell">Optional</td>
+                </tr>
+                <tr>
+                    <td>Souvenirs/Shopping</td>
+                    <td><input type="number" id="tokyo-souvenirs" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-souvenirs" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-souvenirs" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-souvenirs" value="100" onchange="calculate()"></td>
+                    <td class="notes-cell">Estimate</td>
+                </tr>
+                <tr>
+                    <td>Pokemon Cards Budget</td>
+                    <td><input type="number" id="tokyo-pokemon" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-pokemon" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-pokemon" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-pokemon" value="150" onchange="calculate()"></td>
+                    <td class="notes-cell">Cards/merch</td>
+                </tr>
+                <tr>
+                    <td>Special Activities</td>
+                    <td><input type="number" id="tokyo-special" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-special" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-special" value="75" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-special" value="100" onchange="calculate()"></td>
+                    <td class="notes-cell">Tours, etc</td>
+                </tr>
+                <tr>
+                    <td>Miscellaneous</td>
+                    <td><input type="number" id="tokyo-misc" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-misc" value="75" onchange="calculate()"></td>
+                    <td><input type="number" id="mexico-misc" value="75" onchange="calculate()"></td>
+                    <td><input type="number" id="mexicobeach-misc" value="100" onchange="calculate()"></td>
+                    <td class="notes-cell">Buffer</td>
+                </tr>
+
+                <!-- TOTALS -->
+                <tr class="total-row">
+                    <td>SUBTOTAL (Before Flights)</td>
+                    <td class="readonly"><input type="number" id="tokyo-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-subtotal" readonly></td>
+                    <td class="notes-cell"></td>
+                </tr>
+                <tr class="grand-total">
+                    <td>GRAND TOTAL</td>
+                    <td class="readonly"><input type="number" id="tokyo-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-grand-total" readonly></td>
+                    <td class="notes-cell">All costs</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Person</td>
+                    <td class="readonly"><input type="number" id="tokyo-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-per-person" readonly></td>
+                    <td class="notes-cell">Per traveler</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Day</td>
+                    <td class="readonly"><input type="number" id="tokyo-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="mexico-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="mexicobeach-per-day" readonly></td>
+                    <td class="notes-cell">Per day</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; padding: 15px; background-color: #e3f2fd; border-radius: 4px;">
+            <strong>Instructions:</strong> Click on any number to edit it. Totals will update automatically. All costs are in USD.
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Destinations array
+            const destinations = ['tokyo', 'nyc', 'mexico', 'mexicobeach'];
+
+            destinations.forEach(dest => {
+                // Get values
+                const days = parseFloat(document.getElementById(dest + '-days').value) || 0;
+                const nights = parseFloat(document.getElementById(dest + '-nights').value) || 0;
+                const travelers = parseFloat(document.getElementById(dest + '-travelers').value) || 0;
+                const flightPP = parseFloat(document.getElementById(dest + '-flight-pp').value) || 0;
+                const hotelNight = parseFloat(document.getElementById(dest + '-hotel-night').value) || 0;
+                const foodDay = parseFloat(document.getElementById(dest + '-food-day').value) || 0;
+                const transportDay = parseFloat(document.getElementById(dest + '-transport-day').value) || 0;
+                const activitiesDay = parseFloat(document.getElementById(dest + '-activities-day').value) || 0;
+                const insurance = parseFloat(document.getElementById(dest + '-insurance').value) || 0;
+                const souvenirs = parseFloat(document.getElementById(dest + '-souvenirs').value) || 0;
+                const pokemon = parseFloat(document.getElementById(dest + '-pokemon').value) || 0;
+                const special = parseFloat(document.getElementById(dest + '-special').value) || 0;
+                const misc = parseFloat(document.getElementById(dest + '-misc').value) || 0;
+
+                // Calculate
+                const flightTotal = flightPP * travelers;
+                const hotelTotal = hotelNight * nights;
+                const dailyTotal = foodDay + transportDay + activitiesDay;
+                const dailyExpenses = dailyTotal * days;
+                const oneTime = insurance + souvenirs + pokemon + special + misc;
+                const subtotal = hotelTotal + dailyExpenses + oneTime;
+                const grandTotal = flightTotal + subtotal;
+                const perPerson = grandTotal / travelers;
+                const perDay = grandTotal / days;
+
+                // Update fields
+                document.getElementById(dest + '-flight-total').value = flightTotal.toFixed(2);
+                document.getElementById(dest + '-hotel-total').value = hotelTotal.toFixed(2);
+                document.getElementById(dest + '-daily-total').value = dailyTotal.toFixed(2);
+                document.getElementById(dest + '-subtotal').value = subtotal.toFixed(2);
+                document.getElementById(dest + '-grand-total').value = grandTotal.toFixed(2);
+                document.getElementById(dest + '-per-person').value = perPerson.toFixed(2);
+                document.getElementById(dest + '-per-day').value = perDay.toFixed(2);
+            });
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
