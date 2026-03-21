@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Trip Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        h1 {
+            color: #e0e0e0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #16213e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            min-width: 1400px;
+        }
+
+        th {
+            background-color: #0f3460;
+            color: #e0e0e0;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #2a2a4a;
+            font-size: 0.85em;
+            color: #e0e0e0;
+        }
+
+        tr:hover {
+            background-color: #1a1a3e;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #2a2a4a;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.9em;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #533483;
+        }
+
+        .category-header {
+            background-color: #0f3460;
+            font-weight: bold;
+            color: #7ec8e3;
+        }
+
+        .total-row {
+            background-color: #2a1a4e;
+            font-weight: bold;
+        }
+
+        .grand-total {
+            background-color: #533483;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+        }
+
+        .notes-cell {
+            font-size: 0.8em;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .readonly {
+            background-color: #1a1a3e;
+            font-weight: bold;
+        }
+
+        .info-cell {
+            font-size: 0.8em;
+            line-height: 1.4;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>10-Year Anniversary Family Trip Comparison (6 People)</h1>
+
+        <table id="comparisonTable">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Category</th>
+                    <th style="width: 17%;">Maui, Hawaii</th>
+                    <th style="width: 17%;">Costa Rica</th>
+                    <th style="width: 17%;">Puerto Rico</th>
+                    <th style="width: 17%;">Belize</th>
+                    <th style="width: 17%;">Yellowstone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DESTINATION OVERVIEW -->
+                <tr class="category-header">
+                    <td colspan="6">DESTINATION OVERVIEW</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Trip Type</td>
+                    <td class="info-cell">One island base, beach + adventure mix</td>
+                    <td class="info-cell">Rainforest (1 week) + Beach (1-2 weeks)</td>
+                    <td class="info-cell">One base, beach + rainforest + culture</td>
+                    <td class="info-cell">Island (1 week) + Inland jungle (1 week)</td>
+                    <td class="info-cell">National parks, move 2-3 times</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Best Season</td>
+                    <td class="info-cell">
+                        Apr-May, Sep-Oct (less rain)<br>
+                        Dec-Mar (whale season, busier)
+                    </td>
+                    <td class="info-cell">
+                        Dec-Apr (dry season)<br>
+                        Avoid Sep-Oct (rainiest)
+                    </td>
+                    <td class="info-cell">
+                        Dec-Apr (dry, perfect)<br>
+                        Avoid Sep-Nov (hurricanes)
+                    </td>
+                    <td class="info-cell">
+                        Nov-Apr (dry season)<br>
+                        Avoid Sep-Oct (rain/hurricanes)
+                    </td>
+                    <td class="info-cell">
+                        Jun-Aug (all roads open)<br>
+                        May or Sep (fewer crowds)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Language</td>
+                    <td class="info-cell">English</td>
+                    <td class="info-cell"><strong>Spanish</strong> (you speak!)</td>
+                    <td class="info-cell"><strong>Spanish</strong> (you speak!)</td>
+                    <td class="info-cell">English (former British)</td>
+                    <td class="info-cell">English</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Food & Water Safety</td>
+                    <td class="info-cell">★★★★★ US standards, excellent</td>
+                    <td class="info-cell">★★★★ Good, some caution needed</td>
+                    <td class="info-cell">★★★★★ US territory, excellent</td>
+                    <td class="info-cell">★★★★ Good, better than Guatemala</td>
+                    <td class="info-cell">★★★★★ US standards, excellent</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Kid-Friendly Activities</td>
+                    <td class="info-cell">
+                        • Calm beaches with playgrounds<br>
+                        • Snorkeling (Molokini)<br>
+                        • Ocean Center Aquarium<br>
+                        • Road to Hana waterfalls<br>
+                        • Haleakala volcano<br>
+                        • Whale watching (winter)
+                    </td>
+                    <td class="info-cell">
+                        • Wildlife (sloths, monkeys!)<br>
+                        • Hot springs<br>
+                        • Waterfall swimming<br>
+                        • Hanging bridges<br>
+                        • Beach + tide pools<br>
+                        • Manuel Antonio NP
+                    </td>
+                    <td class="info-cell">
+                        • World-class beaches<br>
+                        • El Yunque waterfalls<br>
+                        • Bio-bay kayaking<br>
+                        • Old San Juan forts<br>
+                        • Culebra day trips<br>
+                        • Camuy Caves
+                    </td>
+                    <td class="info-cell">
+                        • Barrier reef snorkeling<br>
+                        • Swimming with nurse sharks<br>
+                        • Mayan ruins (climbable!)<br>
+                        • Cave tubing<br>
+                        • Zip-lining<br>
+                        • Wildlife sanctuaries
+                    </td>
+                    <td class="info-cell">
+                        • Wildlife viewing (bears, bison!)<br>
+                        • Old Faithful geyser<br>
+                        • Grand Prismatic Spring<br>
+                        • Junior Ranger programs<br>
+                        • Easy hiking trails<br>
+                        • Grand Tetons
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Unique Advantages</td>
+                    <td class="info-cell">
+                        • Perfect family beaches<br>
+                        • One base works great<br>
+                        • Safe & easy<br>
+                        • Stunning scenery<br>
+                        • Excellent food
+                    </td>
+                    <td class="info-cell">
+                        • <strong>Most affordable!</strong><br>
+                        • Wildlife everywhere<br>
+                        • Spanish advantage<br>
+                        • Rainforest + beach<br>
+                        • Pura Vida vibe
+                    </td>
+                    <td class="info-cell">
+                        • US easy + Latin culture<br>
+                        • No passport needed<br>
+                        • Very affordable<br>
+                        • Diverse activities<br>
+                        • Spanish advantage
+                    </td>
+                    <td class="info-cell">
+                        • English speaking<br>
+                        • Unique experience<br>
+                        • 2nd largest barrier reef<br>
+                        • Climbable Mayan ruins<br>
+                        • Affordable
+                    </td>
+                    <td class="info-cell">
+                        • Wildlife like nowhere else<br>
+                        • RV camping adventure<br>
+                        • Mountain scenery<br>
+                        • Completely different<br>
+                        • Affordable if camping
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Considerations</td>
+                    <td class="info-cell">
+                        • Most expensive option<br>
+                        • Long flight<br>
+                        • Can feel touristy
+                    </td>
+                    <td class="info-cell">
+                        • Need to move locations once<br>
+                        • Some roads bumpy<br>
+                        • More rustic infrastructure
+                    </td>
+                    <td class="info-cell">
+                        • Hurricane season Jun-Nov<br>
+                        • Some touristy areas<br>
+                        • Can get crowded
+                    </td>
+                    <td class="info-cell">
+                        • More rustic<br>
+                        • Need to move locations<br>
+                        • Limited direct flights<br>
+                        • Less developed
+                    </td>
+                    <td class="info-cell">
+                        • Requires daily driving<br>
+                        • Weather unpredictable<br>
+                        • RV = more work<br>
+                        • Mosquitos in summer
+                    </td>
+                </tr>
+
+                <!-- TRIP BASICS -->
+                <tr class="category-header">
+                    <td colspan="6">TRIP BASICS</td>
+                </tr>
+                <tr>
+                    <td>Number of Days</td>
+                    <td><input type="number" id="maui-days" value="14" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-days" value="21" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-days" value="18" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-days" value="14" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-days" value="14" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Number of Nights</td>
+                    <td><input type="number" id="maui-nights" value="14" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-nights" value="21" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-nights" value="18" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-nights" value="14" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-nights" value="14" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Number of Travelers</td>
+                    <td><input type="number" id="maui-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-travelers" value="6" onchange="calculate()"></td>
+                </tr>
+
+                <!-- FLIGHTS -->
+                <tr class="category-header">
+                    <td colspan="6">FLIGHTS</td>
+                </tr>
+                <tr>
+                    <td>Flight Time (hours)</td>
+                    <td><input type="number" id="maui-flight-time" value="8" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-flight-time" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-flight-time" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-flight-time" value="7" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-flight-time" value="4" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Cost Per Person (Round Trip)</td>
+                    <td><input type="number" id="maui-flight-pp" value="700" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-flight-pp" value="600" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-flight-pp" value="500" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-flight-pp" value="700" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-flight-pp" value="250" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Flight Cost (6 people)</td>
+                    <td class="readonly"><input type="number" id="maui-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-flight-total" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-flight-total" readonly></td>
+                </tr>
+
+                <!-- LODGING -->
+                <tr class="category-header">
+                    <td colspan="6">LODGING</td>
+                </tr>
+                <tr>
+                    <td>Accommodation Type</td>
+                    <td class="info-cell">Vacation rental (2-3 BR, kitchen)</td>
+                    <td class="info-cell">Vacation rentals (2 locations)</td>
+                    <td class="info-cell">Vacation rental (2-3 BR, kitchen)</td>
+                    <td class="info-cell">Mix: island + inland rentals</td>
+                    <td class="info-cell">RV rental OR lodges</td>
+                </tr>
+                <tr>
+                    <td>Cost Per Night</td>
+                    <td><input type="number" id="maui-lodging-night" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-lodging-night" value="140" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-lodging-night" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-lodging-night" value="180" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-lodging-night" value="55" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Lodging Cost</td>
+                    <td class="readonly"><input type="number" id="maui-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-lodging-total" readonly></td>
+                </tr>
+
+                <!-- TRANSPORTATION -->
+                <tr class="category-header">
+                    <td colspan="6">TRANSPORTATION</td>
+                </tr>
+                <tr>
+                    <td>Rental Car/RV (total trip)</td>
+                    <td><input type="number" id="maui-rental" value="800" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-rental" value="750" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-rental" value="700" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-rental" value="350" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-rental" value="3000" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Gas/Fuel (total trip)</td>
+                    <td><input type="number" id="maui-gas" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-gas" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-gas" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-gas" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-gas" value="700" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Other Transport (ferries, etc.)</td>
+                    <td><input type="number" id="maui-other-transport" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-other-transport" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-other-transport" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-other-transport" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-other-transport" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Transportation</td>
+                    <td class="readonly"><input type="number" id="maui-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-transport-total" readonly></td>
+                </tr>
+
+                <!-- DAILY EXPENSES -->
+                <tr class="category-header">
+                    <td colspan="6">DAILY EXPENSES (6 people)</td>
+                </tr>
+                <tr>
+                    <td>Food Per Day</td>
+                    <td><input type="number" id="maui-food-day" value="180" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-food-day" value="80" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-food-day" value="120" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-food-day" value="120" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-food-day" value="100" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Activities Per Day (avg)</td>
+                    <td><input type="number" id="maui-activities-day" value="50" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-activities-day" value="35" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-activities-day" value="40" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-activities-day" value="50" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-activities-day" value="30" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Daily Expenses</td>
+                    <td class="readonly"><input type="number" id="maui-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-daily-total" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-daily-total" readonly></td>
+                </tr>
+
+                <!-- ONE-TIME EXPENSES -->
+                <tr class="category-header">
+                    <td colspan="6">ONE-TIME EXPENSES</td>
+                </tr>
+                <tr>
+                    <td>Travel Insurance (6 people)</td>
+                    <td><input type="number" id="maui-insurance" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-insurance" value="350" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-insurance" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-insurance" value="350" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-insurance" value="250" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Major Activities/Tours</td>
+                    <td><input type="number" id="maui-tours" value="800" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-tours" value="600" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-tours" value="500" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-tours" value="700" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-tours" value="300" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Park Fees/Admissions</td>
+                    <td><input type="number" id="maui-parks" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-parks" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-parks" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-parks" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-parks" value="100" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Souvenirs/Shopping</td>
+                    <td><input type="number" id="maui-souvenirs" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-souvenirs" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-souvenirs" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-souvenirs" value="250" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-souvenirs" value="250" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Miscellaneous/Buffer</td>
+                    <td><input type="number" id="maui-misc" value="500" onchange="calculate()"></td>
+                    <td><input type="number" id="costarica-misc" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="puertorico-misc" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="belize-misc" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="yellowstone-misc" value="400" onchange="calculate()"></td>
+                </tr>
+
+                <!-- TOTALS -->
+                <tr class="total-row">
+                    <td>SUBTOTAL (Before Flights)</td>
+                    <td class="readonly"><input type="number" id="maui-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-subtotal" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-subtotal" readonly></td>
+                </tr>
+                <tr class="grand-total">
+                    <td>GRAND TOTAL</td>
+                    <td class="readonly"><input type="number" id="maui-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-grand-total" readonly></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Person</td>
+                    <td class="readonly"><input type="number" id="maui-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-per-person" readonly></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Day</td>
+                    <td class="readonly"><input type="number" id="maui-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="costarica-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="puertorico-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="belize-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="yellowstone-per-day" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; padding: 15px; background-color: #0f3460; border-radius: 4px; color: #e0e0e0;">
+            <strong>Instructions:</strong> All numbers are editable. Click to change days, costs, etc. Totals update automatically. All costs in USD.
+            <br><strong>Note:</strong> Yellowstone lodging is campground fees ($55/night). For lodge option, change to $280-400/night.
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const destinations = ['maui', 'costarica', 'puertorico', 'belize', 'yellowstone'];
+
+            destinations.forEach(dest => {
+                // Get values
+                const days = parseFloat(document.getElementById(dest + '-days').value) || 0;
+                const nights = parseFloat(document.getElementById(dest + '-nights').value) || 0;
+                const travelers = parseFloat(document.getElementById(dest + '-travelers').value) || 0;
+                const flightPP = parseFloat(document.getElementById(dest + '-flight-pp').value) || 0;
+                const lodgingNight = parseFloat(document.getElementById(dest + '-lodging-night').value) || 0;
+                const rental = parseFloat(document.getElementById(dest + '-rental').value) || 0;
+                const gas = parseFloat(document.getElementById(dest + '-gas').value) || 0;
+                const otherTransport = parseFloat(document.getElementById(dest + '-other-transport').value) || 0;
+                const foodDay = parseFloat(document.getElementById(dest + '-food-day').value) || 0;
+                const activitiesDay = parseFloat(document.getElementById(dest + '-activities-day').value) || 0;
+                const insurance = parseFloat(document.getElementById(dest + '-insurance').value) || 0;
+                const tours = parseFloat(document.getElementById(dest + '-tours').value) || 0;
+                const parks = parseFloat(document.getElementById(dest + '-parks').value) || 0;
+                const souvenirs = parseFloat(document.getElementById(dest + '-souvenirs').value) || 0;
+                const misc = parseFloat(document.getElementById(dest + '-misc').value) || 0;
+
+                // Calculate
+                const flightTotal = flightPP * travelers;
+                const lodgingTotal = lodgingNight * nights;
+                const transportTotal = rental + gas + otherTransport;
+                const dailyTotal = foodDay + activitiesDay;
+                const dailyExpenses = dailyTotal * days;
+                const oneTime = insurance + tours + parks + souvenirs + misc;
+                const subtotal = lodgingTotal + transportTotal + dailyExpenses + oneTime;
+                const grandTotal = flightTotal + subtotal;
+                const perPerson = grandTotal / travelers;
+                const perDay = grandTotal / days;
+
+                // Update fields
+                document.getElementById(dest + '-flight-total').value = flightTotal.toFixed(2);
+                document.getElementById(dest + '-lodging-total').value = lodgingTotal.toFixed(2);
+                document.getElementById(dest + '-transport-total').value = transportTotal.toFixed(2);
+                document.getElementById(dest + '-daily-total').value = dailyTotal.toFixed(2);
+                document.getElementById(dest + '-subtotal').value = subtotal.toFixed(2);
+                document.getElementById(dest + '-grand-total').value = grandTotal.toFixed(2);
+                document.getElementById(dest + '-per-person').value = perPerson.toFixed(2);
+                document.getElementById(dest + '-per-day').value = perDay.toFixed(2);
+            });
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
