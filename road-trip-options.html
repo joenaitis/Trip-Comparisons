@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Trip Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            min-width: 1300px;
+        }
+
+        th {
+            background-color: #FF6F00;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.85em;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.9em;
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #FF6F00;
+        }
+
+        .category-header {
+            background-color: #FFF3E0;
+            font-weight: bold;
+            color: #E65100;
+        }
+
+        .total-row {
+            background-color: #FFE0B2;
+            font-weight: bold;
+        }
+
+        .grand-total {
+            background-color: #FFB74D;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .notes-cell {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .readonly {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .info-cell {
+            font-size: 0.8em;
+            line-height: 1.4;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Family Road Trip Comparison from Grand Rapids (6 People)</h1>
+
+        <table id="comparisonTable">
+            <thead>
+                <tr>
+                    <th style="width: 18%;">Category</th>
+                    <th style="width: 20.5%;">Yellowstone Adventure</th>
+                    <th style="width: 20.5%;">Upper Peninsula</th>
+                    <th style="width: 20.5%;">NYC via Niagara</th>
+                    <th style="width: 20.5%;">Lake Michigan Week</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TRIP OVERVIEW -->
+                <tr class="category-header">
+                    <td colspan="5">TRIP OVERVIEW</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Trip Description</td>
+                    <td class="info-cell">
+                        Epic western parks loop:<br>
+                        Badlands → Mt Rushmore → Devil's Tower → Yellowstone (6 nights) → Tetons → Glacier
+                    </td>
+                    <td class="info-cell">
+                        Michigan's North:<br>
+                        Mackinac Island → Tahquamenon Falls → Pictured Rocks → Lake Superior camping
+                    </td>
+                    <td class="info-cell">
+                        East Coast adventure:<br>
+                        Niagara Falls → NYC (4 days) → Philadelphia → Hershey → home via Ohio
+                    </td>
+                    <td class="info-cell">
+                        Beach relaxation:<br>
+                        One week in Saugatuck or Glen Arbor, beach house rental, full beach mode
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Total Distance</td>
+                    <td><input type="number" id="yellowstone-distance" value="4200" onchange="calculate()"></td>
+                    <td><input type="number" id="up-distance" value="950" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-distance" value="1800" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-distance" value="100" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Total Driving Hours</td>
+                    <td><input type="number" id="yellowstone-drive-hours" value="65" onchange="calculate()"></td>
+                    <td><input type="number" id="up-drive-hours" value="15" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-drive-hours" value="28" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-drive-hours" value="2" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Key Highlights</td>
+                    <td class="info-cell">
+                        • Wildlife (bears, bison, elk, wolves)<br>
+                        • Old Faithful & geysers<br>
+                        • Grand Prismatic Spring<br>
+                        • Going-to-the-Sun Road<br>
+                        • Mount Rushmore<br>
+                        • 5 National Parks!
+                    </td>
+                    <td class="info-cell">
+                        • Mackinac Island (no cars!)<br>
+                        • Pictured Rocks cliffs<br>
+                        • Tahquamenon Falls<br>
+                        • Lake Superior beaches<br>
+                        • Camping & nature<br>
+                        • Close to home
+                    </td>
+                    <td class="info-cell">
+                        • Niagara Falls boat tour<br>
+                        • NYC museums & landmarks<br>
+                        • Statue of Liberty area<br>
+                        • Liberty Bell, Philly history<br>
+                        • Hershey's Chocolate World<br>
+                        • Big city experience
+                    </td>
+                    <td class="info-cell">
+                        • Beach every day!<br>
+                        • Swimming, sandcastles<br>
+                        • Dune climbing<br>
+                        • Small town charm<br>
+                        • Kayaking, biking<br>
+                        • Total relaxation
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Best For</td>
+                    <td class="info-cell">
+                        Adventure-loving families who want once-in-lifetime national park experience
+                    </td>
+                    <td class="info-cell">
+                        Nature-loving families wanting Michigan beauty without long drives
+                    </td>
+                    <td class="info-cell">
+                        Families wanting mix of nature (falls) and big city culture/history
+                    </td>
+                    <td class="info-cell">
+                        Families wanting simple beach relaxation close to home
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Pros</td>
+                    <td class="info-cell">
+                        • Once-in-lifetime experience<br>
+                        • 5 incredible national parks<br>
+                        • Wildlife like nowhere else<br>
+                        • Kids will remember forever<br>
+                        • Great value for 3 weeks
+                    </td>
+                    <td class="info-cell">
+                        • Close to home (easy)<br>
+                        • Beautiful & unique<br>
+                        • Very affordable<br>
+                        • Mackinac is magical<br>
+                        • Pure Michigan pride
+                    </td>
+                    <td class="info-cell">
+                        • Two iconic destinations<br>
+                        • Educational (history)<br>
+                        • Diverse experiences<br>
+                        • Niagara is stunning<br>
+                        • NYC energy
+                    </td>
+                    <td class="info-cell">
+                        • Closest option<br>
+                        • Most relaxing<br>
+                        • Beach every day<br>
+                        • Simple, easy<br>
+                        • Can repeat annually
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Cons</td>
+                    <td class="info-cell">
+                        • Lots of driving<br>
+                        • 3 weeks is long<br>
+                        • Weather unpredictable<br>
+                        • More work than beach trip
+                    </td>
+                    <td class="info-cell">
+                        • Still some driving<br>
+                        • Lake Superior is COLD<br>
+                        • Less "exotic" than others<br>
+                        • Weather dependent
+                    </td>
+                    <td class="info-cell">
+                        • NYC expensive<br>
+                        • Busy, crowds<br>
+                        • Less nature time<br>
+                        • More structured
+                    </td>
+                    <td class="info-cell">
+                        • Can feel repetitive<br>
+                        • Weather dependent<br>
+                        • Less adventurous<br>
+                        • Nearby (less exotic)
+                    </td>
+                </tr>
+
+                <!-- TRIP BASICS -->
+                <tr class="category-header">
+                    <td colspan="5">TRIP BASICS</td>
+                </tr>
+                <tr>
+                    <td>Number of Days</td>
+                    <td><input type="number" id="yellowstone-days" value="21" onchange="calculate()"></td>
+                    <td><input type="number" id="up-days" value="8" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-days" value="12" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-days" value="7" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Number of Nights</td>
+                    <td><input type="number" id="yellowstone-nights" value="20" onchange="calculate()"></td>
+                    <td><input type="number" id="up-nights" value="7" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-nights" value="10" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-nights" value="7" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Number of Travelers</td>
+                    <td><input type="number" id="yellowstone-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="up-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-travelers" value="6" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-travelers" value="6" onchange="calculate()"></td>
+                </tr>
+
+                <!-- TRANSPORTATION -->
+                <tr class="category-header">
+                    <td colspan="5">TRANSPORTATION</td>
+                </tr>
+                <tr>
+                    <td>Gas Cost (total trip)</td>
+                    <td><input type="number" id="yellowstone-gas" value="672" onchange="calculate()"></td>
+                    <td><input type="number" id="up-gas" value="152" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-gas" value="288" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-gas" value="16" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Vehicle Rental (if needed)</td>
+                    <td><input type="number" id="yellowstone-rental" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="up-rental" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-rental" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-rental" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Parking/Tolls/Ferries</td>
+                    <td><input type="number" id="yellowstone-other-transport" value="50" onchange="calculate()"></td>
+                    <td><input type="number" id="up-other-transport" value="184" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-other-transport" value="275" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-other-transport" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Transportation</td>
+                    <td class="readonly"><input type="number" id="yellowstone-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-transport-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-transport-total" readonly></td>
+                </tr>
+
+                <!-- LODGING -->
+                <tr class="category-header">
+                    <td colspan="5">LODGING BREAKDOWN</td>
+                </tr>
+                <tr>
+                    <td>Camping Nights</td>
+                    <td><input type="number" id="yellowstone-camp-nights" value="10" onchange="calculate()"></td>
+                    <td><input type="number" id="up-camp-nights" value="3" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-camp-nights" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-camp-nights" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Camping Cost Per Night</td>
+                    <td><input type="number" id="yellowstone-camp-rate" value="40" onchange="calculate()"></td>
+                    <td><input type="number" id="up-camp-rate" value="25" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-camp-rate" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-camp-rate" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Hotel/Airbnb Nights</td>
+                    <td><input type="number" id="yellowstone-hotel-nights" value="10" onchange="calculate()"></td>
+                    <td><input type="number" id="up-hotel-nights" value="4" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-hotel-nights" value="10" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-hotel-nights" value="7" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Hotel/Airbnb Avg Per Night</td>
+                    <td><input type="number" id="yellowstone-hotel-rate" value="183" onchange="calculate()"></td>
+                    <td><input type="number" id="up-hotel-rate" value="149" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-hotel-rate" value="212" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-hotel-rate" value="393" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Lodging Cost</td>
+                    <td class="readonly"><input type="number" id="yellowstone-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-lodging-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-lodging-total" readonly></td>
+                </tr>
+
+                <!-- FOOD -->
+                <tr class="category-header">
+                    <td colspan="5">FOOD & DINING (6 people)</td>
+                </tr>
+                <tr>
+                    <td>Groceries Per Day</td>
+                    <td><input type="number" id="yellowstone-groceries" value="80" onchange="calculate()"></td>
+                    <td><input type="number" id="up-groceries" value="70" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-groceries" value="80" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-groceries" value="100" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Groceries</td>
+                    <td class="readonly"><input type="number" id="yellowstone-groceries-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-groceries-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-groceries-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-groceries-total" readonly></td>
+                </tr>
+                <tr>
+                    <td>Restaurants (total trip)</td>
+                    <td><input type="number" id="yellowstone-restaurants" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="up-restaurants" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-restaurants" value="400" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-restaurants" value="400" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Food Cost</td>
+                    <td class="readonly"><input type="number" id="yellowstone-food-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-food-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-food-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-food-total" readonly></td>
+                </tr>
+
+                <!-- ACTIVITIES -->
+                <tr class="category-header">
+                    <td colspan="5">ACTIVITIES & ATTRACTIONS</td>
+                </tr>
+                <tr>
+                    <td>National Park Passes</td>
+                    <td><input type="number" id="yellowstone-parks" value="80" onchange="calculate()"></td>
+                    <td><input type="number" id="up-parks" value="35" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-parks" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-parks" value="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Tours & Major Activities</td>
+                    <td><input type="number" id="yellowstone-tours" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="up-tours" value="350" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-tours" value="1300" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-tours" value="300" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Equipment Rentals</td>
+                    <td><input type="number" id="yellowstone-equipment" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="up-equipment" value="100" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-equipment" value="0" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-equipment" value="200" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Total Activities</td>
+                    <td class="readonly"><input type="number" id="yellowstone-activities-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-activities-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-activities-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-activities-total" readonly></td>
+                </tr>
+
+                <!-- OTHER EXPENSES -->
+                <tr class="category-header">
+                    <td colspan="5">OTHER EXPENSES</td>
+                </tr>
+                <tr>
+                    <td>Souvenirs/Shopping</td>
+                    <td><input type="number" id="yellowstone-souvenirs" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="up-souvenirs" value="150" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-souvenirs" value="250" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-souvenirs" value="100" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td>Miscellaneous/Buffer</td>
+                    <td><input type="number" id="yellowstone-misc" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="up-misc" value="200" onchange="calculate()"></td>
+                    <td><input type="number" id="nyc-misc" value="300" onchange="calculate()"></td>
+                    <td><input type="number" id="lakemi-misc" value="200" onchange="calculate()"></td>
+                </tr>
+
+                <!-- TOTALS -->
+                <tr class="grand-total">
+                    <td>GRAND TOTAL</td>
+                    <td class="readonly"><input type="number" id="yellowstone-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="up-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-grand-total" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-grand-total" readonly></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Person</td>
+                    <td class="readonly"><input type="number" id="yellowstone-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="up-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-per-person" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-per-person" readonly></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Cost Per Day</td>
+                    <td class="readonly"><input type="number" id="yellowstone-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="up-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-per-day" readonly></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Driving Time Per Day (avg)</td>
+                    <td class="readonly"><input type="number" id="yellowstone-drive-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="up-drive-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="nyc-drive-per-day" readonly></td>
+                    <td class="readonly"><input type="number" id="lakemi-drive-per-day" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; padding: 15px; background-color: #FFF3E0; border-radius: 4px;">
+            <strong>Instructions:</strong> All numbers are editable. Click to change any value and totals update automatically. All costs in USD.
+            <br><strong>Note:</strong> UP option shown as 1 week (8 days). Extend to 2 weeks by doubling days/nights. Lake MI shows Saugatuck pricing (~$2,750-3,000 for beach house).
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const destinations = ['yellowstone', 'up', 'nyc', 'lakemi'];
+
+            destinations.forEach(dest => {
+                // Get values
+                const days = parseFloat(document.getElementById(dest + '-days').value) || 0;
+                const nights = parseFloat(document.getElementById(dest + '-nights').value) || 0;
+                const travelers = parseFloat(document.getElementById(dest + '-travelers').value) || 0;
+                const driveHours = parseFloat(document.getElementById(dest + '-drive-hours').value) || 0;
+
+                // Transportation
+                const gas = parseFloat(document.getElementById(dest + '-gas').value) || 0;
+                const rental = parseFloat(document.getElementById(dest + '-rental').value) || 0;
+                const otherTransport = parseFloat(document.getElementById(dest + '-other-transport').value) || 0;
+                const transportTotal = gas + rental + otherTransport;
+
+                // Lodging
+                const campNights = parseFloat(document.getElementById(dest + '-camp-nights').value) || 0;
+                const campRate = parseFloat(document.getElementById(dest + '-camp-rate').value) || 0;
+                const hotelNights = parseFloat(document.getElementById(dest + '-hotel-nights').value) || 0;
+                const hotelRate = parseFloat(document.getElementById(dest + '-hotel-rate').value) || 0;
+                const lodgingTotal = (campNights * campRate) + (hotelNights * hotelRate);
+
+                // Food
+                const groceriesDay = parseFloat(document.getElementById(dest + '-groceries').value) || 0;
+                const groceriesTotal = groceriesDay * days;
+                const restaurants = parseFloat(document.getElementById(dest + '-restaurants').value) || 0;
+                const foodTotal = groceriesTotal + restaurants;
+
+                // Activities
+                const parks = parseFloat(document.getElementById(dest + '-parks').value) || 0;
+                const tours = parseFloat(document.getElementById(dest + '-tours').value) || 0;
+                const equipment = parseFloat(document.getElementById(dest + '-equipment').value) || 0;
+                const activitiesTotal = parks + tours + equipment;
+
+                // Other
+                const souvenirs = parseFloat(document.getElementById(dest + '-souvenirs').value) || 0;
+                const misc = parseFloat(document.getElementById(dest + '-misc').value) || 0;
+
+                // Grand total
+                const grandTotal = transportTotal + lodgingTotal + foodTotal + activitiesTotal + souvenirs + misc;
+                const perPerson = grandTotal / travelers;
+                const perDay = grandTotal / days;
+                const drivePerDay = driveHours / days;
+
+                // Update fields
+                document.getElementById(dest + '-transport-total').value = transportTotal.toFixed(2);
+                document.getElementById(dest + '-lodging-total').value = lodgingTotal.toFixed(2);
+                document.getElementById(dest + '-groceries-total').value = groceriesTotal.toFixed(2);
+                document.getElementById(dest + '-food-total').value = foodTotal.toFixed(2);
+                document.getElementById(dest + '-activities-total').value = activitiesTotal.toFixed(2);
+                document.getElementById(dest + '-grand-total').value = grandTotal.toFixed(2);
+                document.getElementById(dest + '-per-person').value = perPerson.toFixed(2);
+                document.getElementById(dest + '-per-day').value = perDay.toFixed(2);
+                document.getElementById(dest + '-drive-per-day').value = drivePerDay.toFixed(1);
+            });
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
